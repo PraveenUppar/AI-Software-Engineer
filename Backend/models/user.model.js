@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
 
 // Async function for Hashing the password before saving the user
 // Password hashing is CPU-intensive, and async/await prevents blocking the event loop.
-userSchema.statics.hashpassword = async (password) => {
+userSchema.statics.hashpassword = async function (password) {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
 };
