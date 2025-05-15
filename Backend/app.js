@@ -5,6 +5,7 @@ import userRoute from "./routes/user.route.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import redisClient from "./services/redis.service.js";
+import cors from "cors";
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Parse cookies from the request
 app.use(cookieParser());
+// Enable CORS for all routes
+app.use(cors());
 
 // Connect to MongoDB
 connectDB();
