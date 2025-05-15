@@ -29,7 +29,7 @@ userSchema.methods.comparePassword = async function (password) {
 
 // Generate a JWT token for the user
 userSchema.methods.generateToken = function () {
-  return jwt.sign({ email: this.email}, process.env.JWT_SECRET);
+  return jwt.sign({ email: this.email }, process.env.JWT_SECRET);
 };
 
 export default mongoose.model("user", userSchema);

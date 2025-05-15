@@ -13,3 +13,17 @@ export const CreateUser = async ({ email, password }) => {
   return user;
 };
 
+export const LoginUser = async ({ email, password }) => { 
+  if (!email || !password) {
+    throw new Error("Email and password are required");
+  }
+  const user = await userModel.findOne({ email }).select("+password");
+  if (!user) {
+    throw new Error("User not found");
+  }
+  const isMatch = await user.comparePassword(password);
+  if (!isMatch) {
+    throw new Error("Invalid credentials");
+  }
+  return user;
+}
