@@ -13,7 +13,7 @@ export const CreateUser = async ({ email, password }) => {
   return user;
 };
 
-export const LoginUser = async ({ email, password }) => { 
+export const LoginUser = async ({ email, password }) => {
   if (!email || !password) {
     throw new Error("Email and password are required");
   }
@@ -26,4 +26,4 @@ export const LoginUser = async ({ email, password }) => {
     throw new Error("Invalid credentials");
   }
   return user;
-}
+};

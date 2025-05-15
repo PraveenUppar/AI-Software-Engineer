@@ -4,6 +4,7 @@ import connectDB from "./db/db.js";
 import userRoute from "./routes/user.route.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import redisClient from "./services/redis.service.js";
 
 const app = express();
 
