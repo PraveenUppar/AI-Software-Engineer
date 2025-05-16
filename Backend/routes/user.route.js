@@ -27,4 +27,10 @@ router.get(
   userController.profileUserController
 );
 
+router.get(
+  "/all",
+  authMiddleware.userAuthMiddleware,
+  userController.getAllUsersController
+);
+
 export default router;

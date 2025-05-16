@@ -1,5 +1,6 @@
 import * as userService from "../services/user.service.js";
 import { validationResult } from "express-validator";
+import userModel from "../models/user.model.js";
 
 // This function validates the data and Call the function from the service to create a user and Generate JWT token
 // To validate the data we use express-validator library
@@ -45,4 +46,25 @@ export const logoutUserController = async (req, res) => {
 
 export const profileUserController = async (req, res) => {
   res.status(200).json({ user: req.user });
+};
+
+
+export const getAllUsersController = async (req, res) => {
+  try {
+    const loggedInUser = await userModel.findOne({
+      email: req.user.email,
+    });
+
+    const allUsers = await userService.getAllUsers({
+      userId: loggedInUser._id,
+    });
+
+    return res.status(200).json({
+      users: allUsers,
+    });
+  } catch (err) {
+    console.log(err);
+
+    res.status(400).json({ error: err.message });
+  }
 };
