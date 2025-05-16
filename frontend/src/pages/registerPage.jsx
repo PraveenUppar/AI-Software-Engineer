@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "../config/axios.js";
 import { useNavigate } from "react-router-dom";
-
+import userContext from "../context/user.context.jsx";
 
 function RegisterPage() {
-  const [email,setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { setUser } = useContext(userContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +15,8 @@ function RegisterPage() {
       .post("/user/register", { email, password })
       .then((res) => {
         console.log(res.data);
+        localStorage.setItem("token", res.data.token);
+        setUser(res.data.user);
         navigate("/");
       })
       .catch((err) => {
@@ -74,7 +77,7 @@ function RegisterPage() {
           <a href="/login" className="text-blue-600 hover:underline">
             Login
           </a>
-        </p> 
+        </p>
       </div>
     </div>
   );

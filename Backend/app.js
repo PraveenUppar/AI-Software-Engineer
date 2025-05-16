@@ -1,11 +1,12 @@
 // Created a express server
 import express from "express";
 import connectDB from "./db/db.js";
-import userRoute from "./routes/user.route.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import redisClient from "./services/redis.service.js";
+// import redisClient from "./services/redis.service.js";
 import cors from "cors";
+import userRoute from "./routes/user.route.js";
+import projectRoute from "./routes/project.route.js";
 
 const app = express();
 
@@ -30,5 +31,6 @@ app.get("/", (req, res) => {
 
 // Route realted to user login and logout
 app.use("/user", userRoute);
+app.use("/project", projectRoute);
 
 export default app;

@@ -3,12 +3,12 @@ import jwt from 'jsonwebtoken';
 export const userAuthMiddleware = (req, res, next) => { 
     const token = req.headers['authorization'];
     if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        return res.status(401).json({ message: 'User Unauthorized' });
     }
     
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
-        return res.status(403).json({ message: 'Forbidden' });
+        return res.status(403).json({ message: 'User Forbidden' });
         }
         req.user = decoded;
         next();
